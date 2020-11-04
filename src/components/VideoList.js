@@ -2,9 +2,12 @@ import React from 'react'
 import VideoItem from './VideoItem'
 import { List } from 'antd'
 
-const VideoList = ({ videos }) => {
+const VideoList = ({ videos, onVideoSelect }) => {
   const renderedList = (video) => (
-    <VideoItem video={video}/>
+    <VideoItem
+      onVideoSelect={onVideoSelect}
+      video={video}
+    />
   )
   return (
     <List
