@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Layout, Row, Col } from 'antd'
 import SearchBar from './SearchBar'
 import VideoList from './VideoList'
@@ -7,9 +7,12 @@ import VideoDetail from './VideoDetail'
 import youtube from '../apis/youtube'
 
 const App = () => {
-
   const [videos, setVideos] = useState([])
   const [selectedVideo, setSelectedVideo] = useState(null)
+
+  useEffect(() => {
+    onSearch('buildings')
+  })
 
   const onSearch = async (value) => {
     const response = await youtube.get('/search', {
@@ -18,6 +21,7 @@ const App = () => {
       }
     })
     setVideos(response.data.items)
+    setSelectedVideo(response.data.items[0])
   }
 
   const onVideoSelect = (video) => {
